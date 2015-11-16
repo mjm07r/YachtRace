@@ -11,7 +11,7 @@ function loadBoat() {
         console.log(item, loaded, total);
     }
     var loader = new THREE.OBJLoader(manager);
-    loader.load('../assets/models/Catamaran.obj', function(object) {
+    loader.load('assets/models/Catamaran.obj', function(object) {
         //object.traverse(function(child){
         //    if (child instanceof THREE.Mesh) {
         //        child.material.map = new THREE.MeshPhongMaterial({color:'white'});

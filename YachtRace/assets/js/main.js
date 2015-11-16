@@ -35,7 +35,7 @@ $(function() {
 
 
 function loadSounds() {
-    var windSound = new Audio("../assets/sounds/wind.mp3");
+    var windSound = new Audio("assets/sounds/wind.mp3");
     windSound.addEventListener('ended', function() {
         this.currentTime = 0;
         this.play();
