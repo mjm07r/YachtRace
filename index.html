@@ -13,15 +13,25 @@
     <script src="YachtRace/assets/js/RingBuilder.js"></script>
     <script src="YachtRace/assets/js/BoatLoader.js"></script>
     <script src="YachtRace/assets/js/TextInfo.js"></script>
+    <script src="assets/libs/three.min.js"></script>
+    <script src="YachtRace/assets/js/Engine.js"></script>
+    <script src="YachtRace/assets/js/Timer.js"></script>
+    <script src="YachtRace/assets/js/LevelTwo.js"></script>
+    <script src="YachtRace/assets/js/LevelThree.js"></script>
     <!--<script src="fonts/droid_serif_bold.typeface.js"></script>-->
 </head>
 
 <body>
 <div id="canvas-3d" class="viewer"></div>
-
+<div id="help" style="display: none">
+    Use 'W''A''S''D' To move the sail boat.
+</div>
 <!-- External libraries -->
 <script src="assets/libs/three.min.js"></script>
-<script src="YachtRace/loaders/OBJLoader.js"></script>
+<!--<script src="YachtRace/loaders/OBJLoader.js"></script>-->
+<script src="YachtRace/loaders/OBJMTLLoader.js"></script>
+<script src="YachtRace/loaders/DDSLoader.js"></script>
+<script src="YachtRace/loaders/MTLLoader.js"></script>
 <script src="demo/assets/libs/RequestAnimationFrame.js"></script>
 <script src="demo/assets/libs/jquery.min.js"></script>
 <script src="demo/assets/libs/three/OrbitControls.js"></script>

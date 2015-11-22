@@ -10,7 +10,7 @@
 function buildRaceRing() {
     var innerRad = 30;
     var outerRad = 40;
-    var ringMaterial = new THREE.MeshPhongMaterial({color:0x008080});
+    var ringMaterial = new THREE.MeshPhongMaterial({color:0xff0000});
     var ringGeometry = new THREE.SphereGeometry(innerRad, outerRad, 32);
     return new THREE.Mesh(ringGeometry, ringMaterial);
 }

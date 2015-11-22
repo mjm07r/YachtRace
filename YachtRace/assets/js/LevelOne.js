@@ -19,14 +19,19 @@ function buildLevelOne(scene) {
 
     // Place rings at all of these places.
     var r1 = buildRaceRing();
+    r1.material.color.setHex(0x33cc33);
     r1.position.set(startPoint.x, startPoint.y, startPoint.z);
     scene.add(r1);
+    checkPoints.push(r1);
     var r2 = buildRaceRing();
+    r2.material.color.setHex(0xffff00);
     r2.position.set(midPoint.x, midPoint.y, midPoint.z);
     scene.add(r2);
+    checkPoints.push(r2);
     var r3 = buildRaceRing();
     r3.position.set(endPoint.x, endPoint.y, endPoint.z);
     scene.add(r3);
+    checkPoints.push(r3);
 
     var startToMid1 = new THREE.Vector3(midPoint.x - startPoint.x, midPoint.y - startPoint.y, midPoint.z - startPoint.z);
     var midToEnd = new THREE.Vector3(endPoint.x - midPoint.x, endPoint.y - midPoint.y, endPoint.z - midPoint.z);

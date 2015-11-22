@@ -6,6 +6,8 @@ var DEMO = {
 	ms_Controls: null,
 	ms_Water: null,
 	ms_meshMirror: null,
+    ms_Keyboard: null,
+	ms_Clock: null,
 
     enable: (function enable() {
         try {
@@ -26,12 +28,18 @@ var DEMO = {
 		this.ms_Scene = new THREE.Scene();
 		
 		this.ms_Camera = new THREE.PerspectiveCamera(55.0, WINDOW.ms_Width / WINDOW.ms_Height, 0.5, 3000000);
-		this.ms_Camera.position.set(1000, 500, -1500);
+		this.ms_Camera.position.set(1000, 40, 200);
 		this.ms_Camera.lookAt(new THREE.Vector3(0, 0, 0));
 		
 		// Initialize Orbit control		
-		this.ms_Controls = new THREE.OrbitControls(this.ms_Camera, this.ms_Renderer.domElement);
-	
+		//this.ms_Controls = new THREE.OrbitControls(this.ms_Camera, this.ms_Renderer.domElement);
+
+		// Initialize clock
+		this.ms_Clock = new THREE.Clock();
+
+		// Initialize keyboard
+        this.ms_Keyboard = new THREEx.KeyboardState();
+
 		// Add light
 		var directionalLight = new THREE.DirectionalLight(0xffff55, 1);
 		directionalLight.position.set(-600, 300, 600);
@@ -91,9 +99,37 @@ var DEMO = {
 		  new THREE.BoxGeometry(1000000, 1000000, 1000000),
 		  aSkyBoxMaterial
 		);
+
+        aSkybox.name = 'skybox';
 		
 		this.ms_Scene.add(aSkybox);
 	},
+
+    replaceSkyBox: function replaceSkyBox(aCubeMap) {
+        // Remove old sky box
+        this.ms_Scene.remove(this.ms_Scene.getObjectByName('skybox'));
+
+        aCubeMap.format = THREE.RGBFormat;
+
+        var aShader = THREE.ShaderLib['cube'];
+        aShader.uniforms['tCube'].value = aCubeMap;
+
+        var aSkyBoxMaterial = new THREE.ShaderMaterial({
+            fragmentShader: aShader.fragmentShader,
+            vertexShader: aShader.vertexShader,
+            uniforms: aShader.uniforms,
+            depthWrite: false,
+            side: THREE.BackSide
+        });
+
+        var aSkybox = new THREE.Mesh(
+            new THREE.BoxGeometry(1000000, 1000000, 1000000),
+            aSkyBoxMaterial
+        );
+
+        this.ms_Scene.add(aSkybox);
+        aSkybox.name = 'skybox';
+    },
 
     display: function display() {
 		this.ms_Water.render();
@@ -102,8 +138,27 @@ var DEMO = {
 	
 	update: function update() {
 		this.ms_Water.material.uniforms.time.value += 1.0 / 60.0;
-		this.ms_Controls.update();
+		//this.ms_Controls.update();
 		this.display();
+
+        //// Move sail with button presses.
+        //if (this.ms_Keyboard.pressed('w')) {
+        //    rotateSailCounterClockwise();
+        //}
+        //if (this.ms_Keyboard.pressed('s')) {
+        //    rotateSailClockwise();
+        //}
+        //if (this.ms_Keyboard.pressed('h')) {
+        //    loadHelp();
+        //}
+        //if (this.ms_Keyboard.pressed('a')){
+        //    turnKeel(-1);
+        //}
+        //if (this.ms_Keyboard.pressed('d')) {
+        //    turnKeel(1);
+        //}
+        // Move camera based off of new boat velocity calculated.
+        //moveCamera();
 	},
 	
 	resize: function resize(inWidth, inHeight) {

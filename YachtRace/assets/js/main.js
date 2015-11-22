@@ -1,6 +1,10 @@
 function mainLoop() {
     requestAnimationFrame(mainLoop);
+    setWindSpeed();
+    //calculateBoatVelocity();
     DEMO.update();
+    updateBoat();
+    checkForCheckpointCollision();
 }
 
 $(function() {
@@ -26,14 +30,24 @@ $(function() {
     // Add info text
     addText();
 
+    // Add timer
+    placeTimer();
+    timer();
+
     // Load sounds
     loadSounds();
+
+    // Test boat velo
+    //calculateBoatVelocity();
+    setInitialWind();
 
     mainLoop();
 });
 
 
-
+var ding;
+var waterSound;
+var gullSound;
 function loadSounds() {
     var windSound = new Audio("assets/sounds/wind.mp3");
     windSound.addEventListener('ended', function() {
@@ -41,4 +55,15 @@ function loadSounds() {
         this.play();
     }, false);
     windSound.play();
+
+    ding = new Audio("assets/sounds/Ding-small-bell.mp3");
+
+    waterSound = new Audio("assets/sounds/water.mp3");
+    waterSound.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+    waterSound.play();
+
+    gullSound = new Audio("assets/sounds/gull.mp3");
 }
