@@ -11,7 +11,7 @@ function timer() {
 var curTime;
 function placeTimer() {
     var seconds = i++;
-    if (seconds % 20 == 0) {
+    if (seconds % 60 == 0) {
         if (gullSound == null ) return;
         gullSound.play();
     }
