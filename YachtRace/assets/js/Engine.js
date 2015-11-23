@@ -297,10 +297,23 @@ function checkForCheckpointCollision() {
     }
     var currentCheckpoint = checkPoints[0];
 
-    // Check for collision
-    var checkPointBox = new THREE.Box3().setFromObject(currentCheckpoint);
-    var boatBox = new THREE.Box3().setFromObject(boatObj);
-    if (boatBox.isIntersectionBox(checkPointBox)) {
+    //// Check for collision
+    //var checkPointBox = new THREE.Box3().setFromObject(currentCheckpoint);
+    //var boatBox = new THREE.Box3().setFromObject(boatObj);
+    //if (boatBox.isIntersectionBox(checkPointBox)) {
+    //    ding.play();
+    //    checkPoints = checkPoints.slice(1);
+    //    DEMO.ms_Scene.remove(currentCheckpoint);
+    //    if (checkPoints[0] != null) {
+    //        checkPoints[0].material.color.setHex(0x33cc33);
+    //    }
+    //    if (checkPoints[1] != null) {
+    //        checkPoints[1].material.color.setHex(0xffff00);
+    //    }
+    //}
+
+    if (Math.abs(boatObj.position.x - currentCheckpoint.position.x) <= 10 &&
+        Math.abs(boatObj.position.z - currentCheckpoint.position.z) <= 10) {
         ding.play();
         checkPoints = checkPoints.slice(1);
         DEMO.ms_Scene.remove(currentCheckpoint);
