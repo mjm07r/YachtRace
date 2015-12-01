@@ -380,6 +380,6 @@ function gameOver() {
     if (again) {
         location.reload();
     } else{
-        window.open('/Final/thanks.html', '_self', false);
+        window.open('thanks.html', '_self', false);
     }
 }
