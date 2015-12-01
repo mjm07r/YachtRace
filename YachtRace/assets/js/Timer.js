@@ -11,7 +11,11 @@ function timer() {
 var curTime;
 function placeTimer() {
     var seconds = i++;
+<<<<<<< HEAD
     if (seconds % 20 == 0) {
+=======
+    if (seconds % 60 == 0) {
+>>>>>>> gh-pages
         if (gullSound == null ) return;
         gullSound.play();
     }

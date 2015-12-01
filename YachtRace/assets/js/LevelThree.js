@@ -13,6 +13,40 @@ function buildLevelThree() {
     ]);
     DEMO.replaceSkyBox(aCubeMap);
 
+<<<<<<< HEAD
+=======
+    // Load volcano
+    var manager = new THREE.LoadingManager();
+    manager.onProgress = function(item, loaded, total) {
+        console.log(item, loaded, total);
+    }
+
+    var onProgress = function ( xhr ) {
+        if ( xhr.lengthComputable ) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            console.log( Math.round(percentComplete, 2) + '% downloaded' );
+        }
+    };
+
+    var onError = function ( xhr ) {
+    };
+
+    THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+    var loader = new THREE.OBJMTLLoader();
+    loader.load('assets/models/volcano.obj', 'assets/models/volcano.mtl', function(object) {
+        object.scale.set(0.008, 0.008, 0.008);
+        //DEMO.ms_Camera.add(object);
+        //object.position.set(-45, -30, -150);
+        DEMO.ms_Scene.add(object);
+        object.position.set(5000, -120, 2000);
+        object.rotateY(Math.PI);
+        object.name = 'boatObj';
+        console.log('Volcano', object);
+        object.children[0].material.color.setHex(0x295E06);
+        setBoatVar();
+    }, onProgress, onError);
+
+>>>>>>> gh-pages
     var j = 0, k = 0;
     for (var i = 0; i < 7; ++i) {
         if (i % 2 == 0) {

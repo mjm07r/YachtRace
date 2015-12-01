@@ -59,6 +59,10 @@ function loadSounds() {
     ding = new Audio("assets/sounds/Ding-small-bell.mp3");
 
     waterSound = new Audio("assets/sounds/water.mp3");
+<<<<<<< HEAD
+=======
+    waterSound.volume = 0.1;
+>>>>>>> gh-pages
     waterSound.addEventListener('ended', function() {
         this.currentTime = 0;
         this.play();
