@@ -312,8 +312,8 @@ function checkForCheckpointCollision() {
     //    }
     //}
 
-    if (Math.abs(boatObj.position.x - currentCheckpoint.position.x) <= 10 &&
-        Math.abs(boatObj.position.z - currentCheckpoint.position.z) <= 10) {
+    if (Math.abs(boatObj.position.x - currentCheckpoint.position.x) <= 30 &&
+        Math.abs(boatObj.position.z - currentCheckpoint.position.z) <= 30) {
         ding.play();
         checkPoints = checkPoints.slice(1);
         DEMO.ms_Scene.remove(currentCheckpoint);

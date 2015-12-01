@@ -59,6 +59,7 @@ function loadSounds() {
     ding = new Audio("assets/sounds/Ding-small-bell.mp3");
 
     waterSound = new Audio("assets/sounds/water.mp3");
+    waterSound.volume = 0.1;
     waterSound.addEventListener('ended', function() {
         this.currentTime = 0;
         this.play();
