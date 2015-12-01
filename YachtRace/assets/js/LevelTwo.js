@@ -62,5 +62,20 @@ function buildLevelTwo() {
     checkPoints.push(r8);
     DEMO.ms_Scene.add(r8);
 
+    var checks = [r1, r2, r3, r4, r5, r6, r7, r8];
+    var obsGeo = new THREE.CubeGeometry(20, 20, 20);
+    var obsMat = new THREE.MeshLambertMaterial({color:'purple'});
+    for (var i = 0, j = Math.round(Math.random() * 10); i < j; ++i) {
+        // Random cubes that are purple
+        var tempObj = new THREE.Mesh(obsGeo, obsMat);
+        DEMO.ms_Scene.add(tempObj);
+        var neg = (Math.random() * 10) % 2 == 0 ? 1 : -1;
+        var closeCheck = checks[Math.round(Math.random() * 10) % 8]
+        tempObj.position.x = closeCheck.position.x + Math.round(Math.random() * 300) * neg;
+        tempObj.position.z = closeCheck.position.z + Math.round(Math.random() * 300) * neg;
+        tempObj.position.y = 0;
+        obstacles.push(tempObj);
+    }
+
     winUp = false;
 }

@@ -33,6 +33,22 @@ function buildLevelOne(scene) {
     scene.add(r3);
     checkPoints.push(r3);
 
+    var checks = [r1, r2, r3];
+    // Try adding random objects that can be run into.
+    var obsGeo = new THREE.CubeGeometry(20, 20, 20);
+    var obsMat = new THREE.MeshLambertMaterial({color:'purple'});
+    for (var i = 0, j = Math.round(Math.random() * 10); i < j; ++i) {
+        // Random cubes that are purple
+        var tempObj = new THREE.Mesh(obsGeo, obsMat);
+        DEMO.ms_Scene.add(tempObj);
+        var neg = (Math.random() * 10) % 2 == 0 ? 1 : -1;
+        var closeCheck = checks[Math.round(Math.random() * 10) % 3]
+        tempObj.position.x = closeCheck.position.x + Math.round(Math.random() * 300) * neg;
+        tempObj.position.z = closeCheck.position.z + Math.round(Math.random() * 300) * neg;
+        tempObj.position.y = 0;
+        obstacles.push(tempObj);
+    }
+
     var startToMid1 = new THREE.Vector3(midPoint.x - startPoint.x, midPoint.y - startPoint.y, midPoint.z - startPoint.z);
     var midToEnd = new THREE.Vector3(endPoint.x - midPoint.x, endPoint.y - midPoint.y, endPoint.z - midPoint.z);
 

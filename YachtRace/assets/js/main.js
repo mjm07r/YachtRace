@@ -5,6 +5,7 @@ function mainLoop() {
     DEMO.update();
     updateBoat();
     checkForCheckpointCollision();
+    checkForObstacleCollision();
 }
 
 $(function() {
@@ -48,6 +49,7 @@ $(function() {
 var ding;
 var waterSound;
 var gullSound;
+var buzzer;
 function loadSounds() {
     var windSound = new Audio("assets/sounds/wind.mp3");
     windSound.addEventListener('ended', function() {
@@ -57,7 +59,7 @@ function loadSounds() {
     windSound.play();
 
     ding = new Audio("assets/sounds/Ding-small-bell.mp3");
-
+    buzzer = new Audio("assets/sounds/buzzer.mp3");
     waterSound = new Audio("assets/sounds/water.mp3");
     waterSound.volume = 0.1;
     waterSound.addEventListener('ended', function() {

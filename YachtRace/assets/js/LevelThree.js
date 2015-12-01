@@ -44,6 +44,7 @@ function buildLevelThree() {
         setBoatVar();
     }, onProgress, onError);
 
+    var checks = [];
     var j = 0, k = 0;
     for (var i = 0; i < 7; ++i) {
         if (i % 2 == 0) {
@@ -59,8 +60,23 @@ function buildLevelThree() {
         }
 
         temp.position.set(j, 25, k);
+        checks.push(temp);
         checkPoints.push(temp);
         DEMO.ms_Scene.add(temp);
+    }
+
+    var obsGeo = new THREE.CubeGeometry(20, 20, 20);
+    var obsMat = new THREE.MeshLambertMaterial({color:'purple'});
+    for (var i = 0, j = Math.round(Math.random() * 10); i < j; ++i) {
+        // Random cubes that are purple
+        var tempObj = new THREE.Mesh(obsGeo, obsMat);
+        DEMO.ms_Scene.add(tempObj);
+        var neg = (Math.random() * 10) % 2 == 0 ? 1 : -1;
+        var closeCheck = checks[Math.round(Math.random() * 10) % 7]
+        tempObj.position.x = closeCheck.position.x + Math.round(Math.random() * 300) * neg;
+        tempObj.position.z = closeCheck.position.z + Math.round(Math.random() * 300) * neg;
+        tempObj.position.y = 0;
+        obstacles.push(tempObj);
     }
 
     winUp = false;

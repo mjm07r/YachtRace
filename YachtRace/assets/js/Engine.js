@@ -297,21 +297,6 @@ function checkForCheckpointCollision() {
     }
     var currentCheckpoint = checkPoints[0];
 
-    //// Check for collision
-    //var checkPointBox = new THREE.Box3().setFromObject(currentCheckpoint);
-    //var boatBox = new THREE.Box3().setFromObject(boatObj);
-    //if (boatBox.isIntersectionBox(checkPointBox)) {
-    //    ding.play();
-    //    checkPoints = checkPoints.slice(1);
-    //    DEMO.ms_Scene.remove(currentCheckpoint);
-    //    if (checkPoints[0] != null) {
-    //        checkPoints[0].material.color.setHex(0x33cc33);
-    //    }
-    //    if (checkPoints[1] != null) {
-    //        checkPoints[1].material.color.setHex(0xffff00);
-    //    }
-    //}
-
     if (Math.abs(boatObj.position.x - currentCheckpoint.position.x) <= 30 &&
         Math.abs(boatObj.position.z - currentCheckpoint.position.z) <= 30) {
         ding.play();
@@ -326,10 +311,48 @@ function checkForCheckpointCollision() {
     }
 }
 
+function moveBoatBack() {
+    boatObj.translateX(  600 );
+    var relativeCameraOffset = new THREE.Vector3(30000,6000,1000);
+
+    var cameraOffset = relativeCameraOffset.applyMatrix4( boatObj.matrixWorld );
+
+    DEMO.ms_Camera.position.x = cameraOffset.x;
+    DEMO.ms_Camera.position.y = cameraOffset.y;
+    DEMO.ms_Camera.position.z = cameraOffset.z;
+    DEMO.ms_Camera.lookAt( boatObj.position );
+}
+
+var obstacles = [];
+
+function checkForObstacleCollision() {
+    if (boatObj == null) {
+        return;
+    }
+
+    if (obstacles.length == 0) {
+        return;
+    }
+
+    for (var i = 0; i < obstacles.length; ++i) {
+        var currentCheckpoint = obstacles[i];
+
+        if (Math.abs(boatObj.position.x - currentCheckpoint.position.x) <= 20 &&
+            Math.abs(boatObj.position.z - currentCheckpoint.position.z) <= 20) {
+            buzzer.play();
+            moveBoatBack();
+        }
+    }
+}
+
+
 var winUp = false;
 function win(){
     var next = window.confirm("Congratulations!!\n You completed level "+level+" in "+curTime+"\n"+
         "Go to next level?");
+    for (var i = 0; i < obstacles.length; ++i) {
+        DEMO.ms_Scene.remove(obstacles[i]);
+    }
     buildNextLevel();
 }
 
